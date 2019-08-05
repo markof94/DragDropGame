@@ -5,6 +5,7 @@ let gameBeginning = true; //Should be true only before the user starts the game 
 
 //===Game objects
 //Declare game objects here like player, enemies etc
+let draggables = [];
 
 //===Buttons
 let playButton;
@@ -24,6 +25,7 @@ let lives;
 //===Images
 let imgLife;
 let imgBackground;
+let imgDraggable;
 
 //===Audio
 let sndMusic;
@@ -68,6 +70,7 @@ function preload() {
 
     soundImage = loadImage(Koji.config.images.soundImage);
     muteImage = loadImage(Koji.config.images.muteImage);
+    imgDraggable = loadImage(Koji.config.images.draggable)
 
     //===Load Sounds
     sndMusic = loadSound(Koji.config.sounds.backgroundMusic);
@@ -202,7 +205,9 @@ function draw() {
 
 
         //Update and render all game objects here
-
+        for(let i = 0; i < draggables.length; i++){
+            draggables[i].render();
+        }
 
         //===Update all floating text objects
         for (let i = 0; i < floatingTexts.length; i++) {
@@ -303,6 +308,12 @@ function init() {
 
     floatingTexts = [];
 
+    SpawnDraggable();
+
+}
+
+function SpawnDraggable(){
+    draggables.push(new Draggable(width/2, height/2));
 }
 
 //===Call this when a lose life event should trigger
