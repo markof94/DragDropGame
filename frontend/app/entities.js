@@ -60,3 +60,12 @@ class Entity {
     }
 
 }
+
+class Draggable extends Entity{
+    constructor(x, y){
+        super(x, y);
+
+        this.img = imgDraggable;
+
+    }
+}
